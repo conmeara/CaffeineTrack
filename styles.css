@@ -1,0 +1,223 @@
+/* Modern CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.accent {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+    color: #64748b;
+    font-size: 1.125rem;
+}
+
+/* Display Container */
+.display {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Time Inputs */
+.time-inputs {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.time-input-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-input-group label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.time-input-group input {
+    padding: 0.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.time-input-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+/* Metrics Container */
+.metrics-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.metric {
+    flex: 1;
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+}
+
+.metric h2 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.metric p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.drink-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.drink-btn:hover {
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.drink-btn .icon {
+    font-size: 1.5rem;
+}
+
+.drink-btn .drink-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.drink-btn .amount {
+    margin-left: auto;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+/* Caffeine Graph */
+.caffeine-graph {
+    position: relative;
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+/* Enhanced Caffeine Icon */
+.caffeine-icon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: ew-resize;
+    user-select: none;
+    font-size: 1.25rem;
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.caffeine-icon.dragging {
+    z-index: 20;
+    scale: 1.2;
+    box-shadow: 0 8px 16px -2px rgb(59 130 246 / 0.25);
+}
+
+/* Tooltip */
+.icon-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.caffeine-icon:hover .icon-tooltip {
+    opacity: 1;
+}
+
+.axis-label {
+    position: absolute;
+    font-size: 12px;
+    color: #64748b;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.axis-label:hover {
+    transform: translateY(-2px);
+    color: #3b82f6;
+}

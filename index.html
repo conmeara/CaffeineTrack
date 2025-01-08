@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Caffeine<span class="accent">Track</span></h1>
+            <p class="tagline">Track your caffeine you little coffee slut.</p>
+        </header>
+        
+        <div class="display">
+            <div class="caffeine-graph">
+                <div class="time-inputs">
+                    <div class="time-input-group">
+                        <label for="waketime">Wake time:</label>
+                        <input type="time" id="waketime" value="07:00" step="60" onChange="updateDisplay()">
+                    </div>
+                    <div class="time-input-group">
+                        <label for="bedtime">Bedtime:</label>
+                        <input type="time" id="bedtime" value="22:00" step="60" onChange="updateDisplay()">
+                    </div>
+                </div>
+                
+                <canvas id="caffeine-clock" width="800" height="600"></canvas>
+                
+                <div class="metrics-container">
+                    <div class="metric">
+                        <h2>Current Caffeine Level</h2>
+                        <p id="caffeine-amount">0 mg</p>
+                    </div>
+                    <div class="metric">
+                        <h2>Caffeine at Bedtime</h2>
+                        <p id="bedtime-amount">0 mg</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button class="drink-btn" onclick="addCaffeine('coffee')">
+                    <span class="icon">☕️</span>
+                    <span class="drink-name">Coffee</span>
+                    <span class="amount">95mg</span>
+                </button>
+                <button class="drink-btn" onclick="addCaffeine('tea')">
+                    <span class="icon">🫖</span>
+                    <span class="drink-name">Tea</span>
+                    <span class="amount">47mg</span>
+                </button>
+                <button class="drink-btn" onclick="addCaffeine('espresso')">
+                    <span class="icon">⚡️</span>
+                    <span class="drink-name">Espresso</span>
+                    <span class="amount">63mg</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
