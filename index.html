@@ -18,49 +18,41 @@
         <div class="display">
             <div class="caffeine-graph">
                 <div class="time-inputs">
-                    <div class="time-input-group">
+                    <div class="time-input-group wake">
                         <label for="waketime">Wake time:</label>
                         <input type="time" id="waketime" value="07:00" step="60" onChange="updateDisplay()">
                     </div>
-                    <div class="time-input-group">
+                    <div class="time-input-group bedtime">
                         <label for="bedtime">Bedtime:</label>
                         <input type="time" id="bedtime" value="22:00" step="60" onChange="updateDisplay()">
                     </div>
                 </div>
                 
-                <canvas id="caffeine-clock" width="800" height="600"></canvas>
-                
-                <div class="metrics-container">
-                    <div class="metric">
-                        <h2>Current Caffeine Level</h2>
-                        <p id="caffeine-amount">0 mg</p>
-                    </div>
-                    <div class="metric">
-                        <h2>Caffeine at Bedtime</h2>
-                        <p id="bedtime-amount">0 mg</p>
-                    </div>
+                <button class="add-drink-btn" id="addDrinkBtn">+</button>
+                <div class="drink-popup" id="drinkPopup">
+                    <button class="popup-drink-btn" onclick="addCaffeine('coffee')">
+                        <span class="icon">☕️</span>
+                        <span class="drink-name">Coffee</span>
+                        <span class="amount">95mg</span>
+                    </button>
+                    <button class="popup-drink-btn" onclick="addCaffeine('tea')">
+                        <span class="icon">🫖</span>
+                        <span class="drink-name">Tea</span>
+                        <span class="amount">47mg</span>
+                    </button>
+                    <button class="popup-drink-btn" onclick="addCaffeine('espresso')">
+                        <span class="icon">⚡️</span>
+                        <span class="drink-name">Espresso</span>
+                        <span class="amount">63mg</span>
+                    </button>
                 </div>
-            </div>
-            
-            <div class="buttons">
-                <button class="drink-btn" onclick="addCaffeine('coffee')">
-                    <span class="icon">☕️</span>
-                    <span class="drink-name">Coffee</span>
-                    <span class="amount">95mg</span>
-                </button>
-                <button class="drink-btn" onclick="addCaffeine('tea')">
-                    <span class="icon">🫖</span>
-                    <span class="drink-name">Tea</span>
-                    <span class="amount">47mg</span>
-                </button>
-                <button class="drink-btn" onclick="addCaffeine('espresso')">
-                    <span class="icon">⚡️</span>
-                    <span class="drink-name">Espresso</span>
-                    <span class="amount">63mg</span>
-                </button>
+                
+                <canvas id="caffeine-clock" width="800" height="600"></canvas>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <script src="script.js"></script>
 </body>
 </html> 

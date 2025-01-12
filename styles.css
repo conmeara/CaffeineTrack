@@ -56,62 +56,100 @@ h1 {
 /* Time Inputs */
 .time-inputs {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .time-input-group {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
+}
+
+.time-input-group input[type="time"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 .time-input-group label {
     font-weight: 600;
-    color: #475569;
+    color: #666;
 }
 
-.time-input-group input {
-    padding: 0.5rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 0.5rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-}
-
-.time-input-group input:focus {
-    outline: none;
-    border-color: #3b82f6;
-}
-
-/* Metrics Container */
-.metrics-container {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.metric {
-    flex: 1;
-    background: #f8fafc;
-    padding: 1.5rem;
+/* Caffeine Graph */
+.caffeine-graph {
+    position: relative;
+    background: white;
     border-radius: 0.75rem;
-    border: 1px solid #e2e8f0;
+    padding: 1rem 1rem 4rem 1rem;
+    height: 500px;
 }
 
-.metric h2 {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #64748b;
+/* Canvas */
+#caffeine-clock {
+    width: 100%;
+    height: 100%;
+}
+
+/* Current Time Indicator */
+.current-time-line {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ef4444;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Draggable Icons */
+.drink-icon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: ew-resize;
+    user-select: none;
+    font-size: 1.25rem;
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.drink-icon.dragging {
+    z-index: 20;
+    scale: 1.2;
+    box-shadow: 0 8px 16px -2px rgb(59 130 246 / 0.25);
+}
+
+/* Icon Tooltip */
+.icon-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
     margin-bottom: 0.5rem;
 }
 
-.metric p {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e293b;
+.drink-icon:hover .icon-tooltip {
+    opacity: 1;
 }
 
 /* Buttons */
@@ -155,69 +193,64 @@ h1 {
     font-size: 0.875rem;
 }
 
-/* Caffeine Graph */
-.caffeine-graph {
-    position: relative;
-    background: white;
-    border-radius: 0.75rem;
-    padding: 1rem;
-}
-
-/* Enhanced Caffeine Icon */
-.caffeine-icon {
+/* Add Drink Button */
+.add-drink-btn {
     position: absolute;
-    transform: translate(-50%, -50%);
-    cursor: ew-resize;
-    user-select: none;
-    font-size: 1.25rem;
-    background: white;
+    top: 6rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    background: #22c55e;
+    color: white;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+    z-index: 100;
 }
 
-.caffeine-icon.dragging {
-    z-index: 20;
-    scale: 1.2;
-    box-shadow: 0 8px 16px -2px rgb(59 130 246 / 0.25);
+.add-drink-btn:hover {
+    transform: scale(1.1);
+    background: #16a34a;
 }
 
-/* Tooltip */
-.icon-tooltip {
+/* Drink Popup */
+.drink-popup {
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e293b;
-    color: white;
+    top: 4rem;
+    right: 1rem;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+    min-width: 200px;
+}
+
+.drink-popup.show {
+    display: flex;
+}
+
+.popup-drink-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid #e2e8f0;
     border-radius: 0.5rem;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.caffeine-icon:hover .icon-tooltip {
-    opacity: 1;
-}
-
-.axis-label {
-    position: absolute;
-    font-size: 12px;
-    color: #64748b;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-}
-
-.axis-label:hover {
-    transform: translateY(-2px);
-    color: #3b82f6;
+.popup-drink-btn:hover {
+    background: #f8fafc;
 }
